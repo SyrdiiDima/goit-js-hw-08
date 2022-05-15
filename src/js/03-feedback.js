@@ -65,12 +65,20 @@ function onFormData(e) {
 }
 
 function onSubmitForm(e) {
+  const formElements = e.currentTarget.elements;
+  const mail = formElements.email.value;
+  const textarea = formElements.message.value;
+
+  if (mail === '' || textarea === '' ) { 
+  alert('пустые поля')
+  }
 
   console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
   e.preventDefault();
   
   e.currentTarget.reset();
   localStorage.removeItem(STORAGE_KEY);
+
   
 }
 
@@ -78,11 +86,11 @@ function onSubmitForm(e) {
   const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
   const formInput = document.querySelector('.feedback-form input');
   const formTextarea = document.querySelector('.feedback-form textarea');
+
   if (data) {
     formInput.value = data.email;
     formTextarea.value = data.message;
   }
-  
   
 })();
 
